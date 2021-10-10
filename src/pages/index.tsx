@@ -12,7 +12,14 @@ import { stripe } from "../services/stripe";
 // Styles
 import styles from "./home.module.scss";
 
-export default function Home() {
+interface IHomeProps {
+  product: {
+    priceId: string;
+    amount: number;
+  };
+}
+
+export default function Home({ product }: IHomeProps) {
   // -------------------------------------------------
   // Render
   // -------------------------------------------------
@@ -42,8 +49,8 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const price = await stripe.prices.retrieve("price_1J6MflBGkUVQ6nCzFedk8lS8", {
-    expand: ["procuct"],
+  const price = await stripe.prices.retrieve("price_1Jj83rGD74qADWTEbxHVmfmE", {
+    expand: ["product"],
   });
 
   const product = {
