@@ -6,6 +6,9 @@ import SubscribeButton from "../components/SubscribeButton";
 // Types
 import { GetServerSideProps } from "next";
 
+// Services
+import { stripe } from "../services/stripe";
+
 // Styles
 import styles from "./home.module.scss";
 
@@ -39,5 +42,18 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  return {};
+  const price = await stripe.prices.retrieve("price_1J6MflBGkUVQ6nCzFedk8lS8", {
+    expand: ["procuct"],
+  });
+
+  const product = {
+    priceId: price.id,
+    amount: price.unit_amount / 100,
+  };
+
+  return {
+    props: {
+      product,
+    },
+  };
 };
