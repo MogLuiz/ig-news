@@ -1,6 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 // Components
 import Head from "next/head";
-import Image from "next/image";
+
+// Styles
+import styles from "./home.module.scss";
 
 export default function Home() {
   // -------------------------------------------------
@@ -12,8 +15,8 @@ export default function Home() {
         <title>Home | ignews</title>
       </Head>
 
-      <main>
-        <section>
+      <main className={styles.content_container}>
+        <section className={styles.hero}>
           <span>👏 Hey, welcome</span>
           <h1>
             News about the <span>React</span> world.
@@ -24,12 +27,7 @@ export default function Home() {
           </p>
         </section>
 
-        <Image
-          src="/images/avatar.svg"
-          alt="Girl coding"
-          width="450px"
-          height="450px"
-        />
+        <img src="/images/avatar.svg" alt="Girl coding" />
       </main>
     </>
   );
