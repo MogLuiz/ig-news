@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import SignInButton from "../SignInButton";
 
 // Styles
 import styles from "./styles.module.scss";
@@ -14,6 +15,7 @@ export const Header: React.FC = () => {
           </a>
           <a href="#">Posts</a>
         </nav>
+        <SignInButton />
       </div>
     </header>
   );
