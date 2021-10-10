@@ -1,11 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+
+// Styles
+import styles from "./styles.module.scss";
+
 export const Header: React.FC = () => {
   return (
-    <header>
-      <div>
+    <header className={styles.header_container}>
+      <div className={styles.header_content}>
         <img src="/images/logo.svg" alt="ig.news" />
         <nav>
-          <a href="#">Home</a>
+          <a className={styles.active} href="#">
+            Home
+          </a>
           <a href="#">Posts</a>
         </nav>
       </div>
