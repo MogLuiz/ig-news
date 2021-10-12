@@ -27,7 +27,7 @@ const SignInButton: React.FC = () => {
       <FaGithub color={session ? "#04d361" : "#eba417"} />
       {session ? (
         <>
-          <span>Luiz Henrique</span>
+          <span>{session.user.name}</span>
           <FiX color="#737380" className={styles.close_icon} />
         </>
       ) : (
