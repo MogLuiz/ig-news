@@ -6,6 +6,7 @@ import { signIn, useSession } from "next-auth/client";
 
 // Styles
 import styles from "./styles.module.scss";
+import { api } from "../../services/api";
 
 interface ISubscribeButtonProps {
   priceId: string;
@@ -22,11 +23,17 @@ const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
   // Functions
   // -------------------------------------------------
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
     if (!session) {
       signIn("github");
       return;
     }
+
+    try {
+      const response = await api.post("/subscribe");
+
+      const { sessionId } = response as any;
+    } catch {}
   };
 
   // -------------------------------------------------
