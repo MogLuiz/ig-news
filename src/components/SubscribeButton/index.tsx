@@ -4,9 +4,12 @@ import React from "react";
 // Hooks
 import { signIn, useSession } from "next-auth/client";
 
+// Services
+import { api } from "../../services/api";
+import { getStripeJs } from "../../services/stripe-js";
+
 // Styles
 import styles from "./styles.module.scss";
-import { api } from "../../services/api";
 
 interface ISubscribeButtonProps {
   priceId: string;
@@ -32,8 +35,14 @@ const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
     try {
       const response = await api.post("/subscribe");
 
-      const { sessionId } = response as any;
-    } catch {}
+      const { sessionId } = response.data;
+
+      const stripe = await getStripeJs();
+
+      await stripe.redirectToCheckout({ sessionId });
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   // -------------------------------------------------
