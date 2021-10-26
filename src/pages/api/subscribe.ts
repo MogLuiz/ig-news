@@ -1,11 +1,18 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { NextApiRequest, NextApiResponse} from "next"
+import { getSession } from "next-auth/client"
 import { stripe } from "../../services/stripe"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method === "POST") {
+        const session = await getSession({ req })
+
+        const stripeCustomer = await stripe.customers.create({
+            email: session.user.email,
+        })
         
-        const checkoutSesssion = await stripe.checkout.sessions.create({
+        const stripeCheckoutSesssion = await stripe.checkout.sessions.create({
+            customer: stripeCustomer.id,
             payment_method_types: ["card"],
             billing_address_collection: "required",
             line_items: [
