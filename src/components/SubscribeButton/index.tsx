@@ -54,11 +54,13 @@ const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
     }
   };
 
-  const handleSubmitUser = (user: IUser) => {
+  const handleSubmitUser = async (user: IUser) => {
     const { adress, age, name } = user;
 
+    const { street, isDowntown } = adress;
+
     if (!adress.isDowntown) {
-      adress.isDowntown = false;
+      isDowntown: false;
     }
   };
 
