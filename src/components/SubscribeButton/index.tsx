@@ -15,6 +15,15 @@ interface ISubscribeButtonProps {
   priceId: string;
 }
 
+interface IUser {
+  name: string;
+  age: number;
+  adress: {
+    street: string;
+    isDowntown?: boolean;
+  };
+}
+
 const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
   // -------------------------------------------------
   // Hooks
@@ -42,6 +51,14 @@ const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
       await stripe.redirectToCheckout({ sessionId });
     } catch (err) {
       alert(err.message);
+    }
+  };
+
+  const handleSubmitUser = (user: IUser) => {
+    const { adress, age, name } = user;
+
+    if (!adress.isDowntown) {
+      adress.isDowntown = false;
     }
   };
 
