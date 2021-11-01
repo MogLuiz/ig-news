@@ -8,21 +8,11 @@ import { signIn, useSession } from "next-auth/client";
 import { api } from "../../services/api";
 import { getStripeJs } from "../../services/stripe-js";
 
+// Types
+import { ISubscribeButtonProps, IUser } from "./types";
+
 // Styles
 import styles from "./styles.module.scss";
-
-interface ISubscribeButtonProps {
-  priceId: string;
-}
-
-interface IUser {
-  name: string;
-  age: number;
-  adress: {
-    street: string;
-    isDowntown?: boolean;
-  };
-}
 
 const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
   // -------------------------------------------------
@@ -66,6 +56,8 @@ const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
       const { sessionIdSubscribe } = responseSubscribe.data;
 
       const stripe = await getStripeJs();
+
+      await stripe.redirectToCheckout({ sessionId: sessionIdSubscribe });
     } catch (err) {
       alert("user isn't subscribe");
     }
