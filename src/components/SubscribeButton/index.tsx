@@ -44,35 +44,6 @@ const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
     }
   };
 
-  const handleUserInscribe = async () => {
-    if (!session) {
-      signIn("github");
-      return;
-    }
-
-    try {
-      const responseSubscribe = await api.post("/subscribe/:id");
-
-      const { sessionIdSubscribe } = responseSubscribe.data;
-
-      const stripe = await getStripeJs();
-
-      await stripe.redirectToCheckout({ sessionId: sessionIdSubscribe });
-    } catch (err) {
-      alert("user isn't subscribe");
-    }
-  };
-
-  const handleSubmitUser = async (user: IUser) => {
-    const { adress, age, name } = user;
-
-    const { street, isDowntown } = adress;
-
-    if (!adress.isDowntown) {
-      isDowntown: false;
-    }
-  };
-
   // -------------------------------------------------
   // Render
   // -------------------------------------------------
