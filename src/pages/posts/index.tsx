@@ -11,9 +11,9 @@ export default function Posts() {
         <title>Posts | Ignews</title>
       </Head>
 
-      <main>
-        <div>
-          <a>
+      <main className={styles.container}>
+        <div className={styles.posts}>
+          <a href="#">
             <time>10 de março de 2021</time>
             <strong>Quando usar useMemo e useCallback</strong>
             <p>
@@ -22,7 +22,7 @@ export default function Posts() {
               funções.
             </p>
           </a>
-          <a>
+          <a href="#">
             <time>10 de março de 2021</time>
             <strong>Quando usar useMemo e useCallback</strong>
             <p>
@@ -31,7 +31,7 @@ export default function Posts() {
               funções.
             </p>
           </a>
-          <a>
+          <a href="#">
             <time>10 de março de 2021</time>
             <strong>Quando usar useMemo e useCallback</strong>
             <p>
