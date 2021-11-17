@@ -1,33 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-//Packages
-import Link from "next/link";
-import { useRouter } from "next/router";
 
 // Compontents
 import SignInButton from "../SignInButton";
+import { ActiveLink } from "../ActiveLink";
 
 // Styles
 import styles from "./styles.module.scss";
 
 export const Header: React.FC = () => {
-  const { asPath } = useRouter();
-
-  console.log(asPath);
-
   return (
     <header className={styles.header_container}>
       <div className={styles.header_content}>
         <img src="/images/logo.svg" alt="ig.news" />
         <nav>
-          <Link href="/">
-            <a className={`${asPath === "/" ? styles.active : ""}`}>Home</a>
-          </Link>
+          <ActiveLink href="/" activeClassname={styles.active}>
+            <a>Home</a>
+          </ActiveLink>
 
-          <Link href="/posts" prefetch>
-            <a className={`${asPath === "/posts" ? styles.active : ""}`}>
-              Posts
-            </a>
-          </Link>
+          <ActiveLink href="/posts" prefetch activeClassname={styles.active}>
+            <a>Posts</a>
+          </ActiveLink>
         </nav>
         <SignInButton />
       </div>
