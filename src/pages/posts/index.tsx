@@ -12,7 +12,18 @@ import { GetStaticProps } from "next";
 // Styles
 import styles from "./styles.module.scss";
 
-export default function Posts() {
+interface IPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+}
+
+interface IPostsProps {
+  posts: IPost[];
+}
+
+export default function Posts({ posts }: IPostsProps) {
   // -------------------------------------------------
   // Render
   // -------------------------------------------------
@@ -87,6 +98,8 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   return {
-    props: {},
+    props: {
+      posts,
+    },
   };
 };
