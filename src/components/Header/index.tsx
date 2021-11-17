@@ -1,4 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+//Packages
+import Link from "next/link";
+
+// Compontents
 import SignInButton from "../SignInButton";
 
 // Styles
@@ -10,10 +14,13 @@ export const Header: React.FC = () => {
       <div className={styles.header_content}>
         <img src="/images/logo.svg" alt="ig.news" />
         <nav>
-          <a className={styles.active} href="#">
-            Home
-          </a>
-          <a href="#">Posts</a>
+          <Link href="/">
+            <a className={styles.active}>Home</a>
+          </Link>
+
+          <Link href="/posts" prefetch>
+            <a>Posts</a>
+          </Link>
         </nav>
         <SignInButton />
       </div>
