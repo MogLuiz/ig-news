@@ -3,7 +3,14 @@ import { getSession } from "next-auth/client";
 import { RichText } from "prismic-dom";
 import { getPrismicClient } from "../../services/prismic";
 
-export default function Post() {
+interface IPostsProps {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+}
+
+export default function Post({ post }: IPostsProps) {
   return <h1>Teste</h1>;
 }
 

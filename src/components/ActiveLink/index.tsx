@@ -1,5 +1,4 @@
 // Packages
-
 import { useRouter } from "next/router";
 import Link, { LinkProps } from "next/link";
 import { ReactElement, cloneElement } from "react";
@@ -15,8 +14,6 @@ export function ActiveLink({
   ...rest
 }: IActiveLinkProps) {
   const { asPath } = useRouter();
-
-  console.log(children);
 
   const className = asPath === rest.href ? activeClassname : "";
 
