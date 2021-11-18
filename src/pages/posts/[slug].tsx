@@ -4,6 +4,8 @@ import { getSession } from "next-auth/client";
 import { RichText } from "prismic-dom";
 import { getPrismicClient } from "../../services/prismic";
 
+import styles from "./slug.module.scss";
+
 interface IPostsProps {
   post: {
     slug: string;
@@ -20,11 +22,14 @@ export default function Post({ post }: IPostsProps) {
         <title>{post.title} | Ignews</title>
       </Head>
 
-      <main>
-        <article>
+      <main className={styles.container}>
+        <article className={styles.post}>
           <h1>{post.title}</h1>
           <time>{post.updatedAt}</time>
-          <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+          <div
+            className={styles.postContent}
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          ></div>
         </article>
       </main>
     </>
