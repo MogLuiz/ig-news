@@ -16,6 +16,8 @@ export function ActiveLink({
 }: IActiveLinkProps) {
   const { asPath } = useRouter();
 
+  console.log(children);
+
   const className = asPath === rest.href ? activeClassname : "";
 
   return (
