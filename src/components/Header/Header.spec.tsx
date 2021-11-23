@@ -11,6 +11,14 @@ jest.mock("next/router", () => {
   };
 });
 
+jest.mock("next-auth/client", () => {
+  return {
+    useSession() {
+      return [null, false];
+    },
+  };
+});
+
 describe("Header component", () => {
   it("renders correctly", () => {
     const { getByText } = render(<Header />);
