@@ -1,6 +1,4 @@
-export interface ISubscribeButtonProps {
-    priceId: string;
-  }
+
   
 export interface IUser {
     name: string;

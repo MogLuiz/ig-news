@@ -9,12 +9,12 @@ import { api } from "../../services/api";
 import { getStripeJs } from "../../services/stripe-js";
 
 // Types
-import { ISubscribeButtonProps, IUser } from "./types";
+import { IUser } from "./types";
 
 // Styles
 import styles from "./styles.module.scss";
 
-const SubscribeButton: React.FC<ISubscribeButtonProps> = ({ priceId }) => {
+const SubscribeButton: React.FC = () => {
   // -------------------------------------------------
   // Hooks
   // -------------------------------------------------
