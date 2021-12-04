@@ -46,12 +46,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             try {
                 switch(type) {
                     case "checkout.session.completed":
+                        
                         break;
                     default:
                         throw new Error("Unhandled event.")
                 }
             } catch (err) {
-                return res.json({ error: "Webhook handler filed" })
+                return res.json({ error: "Webhook handler filed." })
             }
         }
 
