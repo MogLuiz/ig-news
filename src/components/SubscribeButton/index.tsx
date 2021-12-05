@@ -1,5 +1,6 @@
 // Packages
 import React from "react";
+import { useRouter } from "next/router";
 
 // Hooks
 import { signIn, useSession } from "next-auth/client";
@@ -20,6 +21,7 @@ const SubscribeButton: React.FC = () => {
   // -------------------------------------------------
 
   const [session] = useSession();
+  const router = useRouter();
 
   // -------------------------------------------------
   // Functions
@@ -28,6 +30,11 @@ const SubscribeButton: React.FC = () => {
   const handleSubscribe = async () => {
     if (!session) {
       signIn("github");
+      return;
+    }
+
+    if (session.activeSubscription) {
+      router.push("./posts");
       return;
     }
 
