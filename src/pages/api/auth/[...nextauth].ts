@@ -40,7 +40,10 @@ export default NextAuth({
         )
       )
 
-      return session
+      return {
+        ...session,
+        activeSubscription: userActiveSubscription
+      }
     },
     async signIn(user, account, profile) {
 
