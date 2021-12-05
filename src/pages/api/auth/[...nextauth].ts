@@ -3,7 +3,8 @@ import Providers from "next-auth/providers"
 
 // FaunaDB
 import { fauna } from "../../../services/fauna"
-import { query } from "faunadb"
+import { query as q } from "faunadb"
+import { session } from "next-auth/client"
 
 export default NextAuth({
   providers: [
@@ -14,29 +15,50 @@ export default NextAuth({
     }),
   ],
   callbacks: {
+    async session(session) {
+    
+      const userActiveSubscription = await fauna.query(
+        q.Get(
+          q.Match(
+            q.Index("subscription_by_user_ref"),
+            q.Select(
+              "ref",
+              q.Get(
+                q.Match(
+                  q.Index("user_by_email"),
+                  q.Casefold(session.user.email)
+                )
+              )
+            )
+          )
+        )
+      )
+
+      return session
+    },
     async signIn(user, account, profile) {
 
       const { email } = user
 
       try {
         await fauna.query(
-          query.If(
-            query.Not(
-              query.Exists(
-                query.Match(
-                  query.Index("user_by_email"),
-                  query.Casefold(user.email)
+          q.If(
+            q.Not(
+              q.Exists(
+                q.Match(
+                  q.Index("user_by_email"),
+                  q.Casefold(user.email)
                 )
               )
             ),
-            query.Create(
-              query.Collection("users"),
+            q.Create(
+              q.Collection("users"),
               { data: { email } }
             ),
-            query.Get(
-              query.Match(
-                query.Index("user_by_email"),
-                query.Casefold(user.email)
+            q.Get(
+              q.Match(
+                q.Index("user_by_email"),
+                q.Casefold(user.email)
               )
             )
           )
