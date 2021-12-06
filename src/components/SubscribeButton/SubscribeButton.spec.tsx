@@ -30,4 +30,6 @@ describe("SubscribeButton component", () => {
 
     expect(signInMocked).toHaveBeenCalled();
   });
+
+  it("redirects to posts when user already has a subscription", () => {});
 });
