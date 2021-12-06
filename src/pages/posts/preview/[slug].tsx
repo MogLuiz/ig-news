@@ -36,6 +36,13 @@ export default function PostPreview({ post }: IPostsPreviewProps) {
   );
 }
 
+export const getStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params;
 
