@@ -1,9 +1,17 @@
-import Head from "next/head";
-import { GetServerSideProps } from "next";
+// Packages
 import { getSession } from "next-auth/client";
 import { RichText } from "prismic-dom";
+
+// Components
+import Head from "next/head";
+
+// Services
 import { getPrismicClient } from "../../services/prismic";
 
+// Types
+import { GetServerSideProps } from "next";
+
+// Styles
 import styles from "./slug.module.scss";
 
 interface IPostsProps {
@@ -16,6 +24,9 @@ interface IPostsProps {
 }
 
 export default function Post({ post }: IPostsProps) {
+  // -------------------------------------------------
+  // Render
+  // -------------------------------------------------
   return (
     <>
       <Head>

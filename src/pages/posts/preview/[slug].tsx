@@ -19,6 +19,9 @@ interface IPostsPreviewProps {
 }
 
 export default function PostPreview({ post }: IPostsPreviewProps) {
+  // -------------------------------------------------
+  // Hooks
+  // -------------------------------------------------
   const [session] = useSession();
   const router = useRouter();
 
@@ -27,6 +30,10 @@ export default function PostPreview({ post }: IPostsPreviewProps) {
       router.push(`/posts/${post.slug}`);
     }
   }, [post.slug, router, session]);
+
+  // -------------------------------------------------
+  // Render
+  // -------------------------------------------------
 
   return (
     <>

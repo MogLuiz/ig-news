@@ -1,5 +1,6 @@
 // Packages
 import Head from "next/head";
+import { useState } from "react";
 import Prismic from "@prismicio/client";
 import { RichText } from "prismic-dom";
 import Link from "next/link";
@@ -7,13 +8,14 @@ import Link from "next/link";
 // Services
 import { getPrismicClient } from "../../services/prismic";
 
+// Hooks
+import { useSession } from "next-auth/client";
+
 // Types
 import { GetStaticProps } from "next";
 
 // Styles
 import styles from "./styles.module.scss";
-import { useSession } from "next-auth/client";
-import { useState } from "react";
 
 interface IPost {
   slug: string;
@@ -27,8 +29,14 @@ interface IPostsProps {
 }
 
 export default function Posts({ posts }: IPostsProps) {
+  // -------------------------------------------------
+  // Hooks
+  // -------------------------------------------------
   const [session] = useSession();
 
+  // -------------------------------------------------
+  // State
+  // -------------------------------------------------
   const [redirectPreview] = useState(() => {
     if (session && !session?.activeSubscription) return true;
 
