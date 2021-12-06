@@ -12,6 +12,8 @@ import { GetStaticProps } from "next";
 
 // Styles
 import styles from "./styles.module.scss";
+import { useSession } from "next-auth/client";
+import { useState } from "react";
 
 interface IPost {
   slug: string;
@@ -25,6 +27,16 @@ interface IPostsProps {
 }
 
 export default function Posts({ posts }: IPostsProps) {
+  const [session] = useSession();
+
+  const [redirectPreview] = useState(() => {
+    if (session && !session?.activeSubscription) return true;
+
+    if (!session) return true;
+
+    return false;
+  });
+
   // -------------------------------------------------
   // Render
   // -------------------------------------------------
@@ -37,7 +49,14 @@ export default function Posts({ posts }: IPostsProps) {
       <main className={styles.container}>
         <div className={styles.posts}>
           {posts?.map((post) => (
-            <Link key={post.slug} href={`/posts/${post.slug}`}>
+            <Link
+              key={post.slug}
+              href={
+                redirectPreview
+                  ? `/posts/preview/${post.slug}`
+                  : `/posts/${post.slug}`
+              }
+            >
               <a>
                 <time>{post.updatedAt}</time>
                 <strong>{post.title}</strong>
