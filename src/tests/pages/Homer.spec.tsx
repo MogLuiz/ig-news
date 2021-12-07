@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-
+import { stripe } from "../../services/stripe";
 import Home from "../../pages";
 
 jest.mock("next/router");
@@ -9,6 +9,8 @@ jest.mock("next-auth/client", () => {
     useSession: () => [null, false],
   };
 });
+
+jest.mock("../../services/stripe");
 
 describe("Home page", () => {
   it("renders correctly", () => {
