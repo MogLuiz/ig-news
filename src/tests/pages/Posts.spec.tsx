@@ -4,6 +4,8 @@ import { mocked } from "ts-jest/utils";
 import { stripe } from "../../services/stripe";
 import Posts, { getStaticProps } from "../../pages/posts";
 
+import { getPrismicClient } from "../../services/prismic";
+
 const posts = [
   {
     slug: "my-new-post",
@@ -12,6 +14,8 @@ const posts = [
     updatedAt: "10 de Abril",
   },
 ];
+
+jest.mock("../../services/prismic");
 
 describe("Home page", () => {
   it("renders correctly", () => {
